@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <body>
-    <script>
-        alert('1:cadstrar\n2:lista\n3:sair');
-        let  numero = prompt('');
-        opccao =0;
-        while(opccao != 10){
-        switch(numero){
-           case '1': alert('cadastrar')
-           break
-           case '2': alert('listar')
-           break
-           case '3': alert('sair')
-           break
-       }
+    <script> 
+    let livros = [];
+    function cadastrar() {
+        alert('cadastrar')
+        let nome = prompt('nome do livro');
+        let autor = prompt('nome do autor');
+        let livro = {
+            nome: nome,
+            autor: autor
+        };
+        livros.push(livro);
     }
+    function listar() {
+        alert('listar')
+        let mensagem = '';
+        for (let livro of livros) {
+            mensagem += livro['nome'] + '-' + livro.autor + '\n'
+        }
+        alert(mensagem)
+    }     
+    loop:
+        while (true) {
+            alert('1:cadastrar\n2:lista\n3:sair');
+            opcao = prompt('');
+            switch (opcao) {
+                case '1': 
+                    cadastrar()
+                    break
+                case '2': 
+                    listar()
+                    break
+                case '3': 
+                    alert('sair')
+                    break loop;
+           }
+        }
     </script>
 </body>
 </html>
