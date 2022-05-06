@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <body>
-    <script> 
-    let livros = [];
-    function cadastrar() {
+    <script>
+    let livrosTerror = [];
+
+    let livrosFiccao = [];
+    function cadastrar(livros) {
         alert('cadastrar')
         let nome = prompt('nome do livro');
         let autor = prompt('nome do autor');
@@ -47,11 +49,11 @@
     }
     loop:
         while (true) {
-            alert('1:cadastrar\n2:lista\n3:editar\n4:apagar\n5:sair');
+            alert('1:cadastrarFiccao\n2:lista\n3:editar\n4:apagar\n5:cadastrar terror\n6:listar terror\n7:sair');
             opcao = prompt('');
             switch (opcao) {
                 case '1': 
-                    cadastrar()
+                    cadastrar(livrosFiccao)
                     break
                 case '2': 
                     listar()
@@ -61,8 +63,14 @@
                     break
                 case '4':
                     apagar()
-                    break        
-                case '5': 
+                    break
+                case '5':
+                    cadastrar(livrosTerror)
+                    break
+                case '6':
+                    listar()
+                    break                
+                case '7': 
                     alert('sair')
                     break loop;
            }
