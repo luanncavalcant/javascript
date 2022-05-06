@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <body>
-    <script> 
-    let livros = [];
-    function cadastrar() {
+    <script>
+    let livrosTerror = [];
+
+    let livrosFiccao = [];
+    function cadastrar(livros) {
         alert('cadastrar')
         let nome = prompt('nome do livro');
         let autor = prompt('nome do autor');
@@ -15,23 +17,60 @@
     function listar() {
         alert('listar')
         let mensagem = '';
+        let id = 0;
         for (let livro of livros) {
-            mensagem += livro['nome'] + '-' + livro.autor + '\n'
+            mensagem += id + ':' + livro['nome'] + '-' + livro.autor + '\n';
+            id++ ;
         }
-        alert(mensagem)
-    }     
+        alert(mensagem);
+    }   
+    function editar() {
+        listar()
+        let id = parseInt(prompt('Qual id quer editar?'))
+        let livro = livros[id]
+        let nome = prompt(`nome do livro? [${livro.nome}]`); 
+        if (nome == '') {
+            nome = livro.nome        
+        } 
+        let autor = prompt(`nome do autor? [${livro.autor}]`);
+        if (autor == '') {
+            autor = livro.autor        
+        } 
+        let livroNovo = {
+            nome: nome,
+            autor: autor
+        };
+        livros[id] = livroNovo
+    }  
+    function apagar() {
+        listar()
+        let id = parseInt(prompt('Qual id quer apagar?')) 
+        livros.splice(id, 1)
+    }
     loop:
         while (true) {
-            alert('1:cadastrar\n2:lista\n3:sair');
+            alert('1:cadastrarFiccao\n2:lista\n3:editar\n4:apagar\n5:cadastrar terror\n6:listar terror\n7:sair');
             opcao = prompt('');
             switch (opcao) {
                 case '1': 
-                    cadastrar()
+                    cadastrar(livrosFiccao)
                     break
                 case '2': 
                     listar()
                     break
-                case '3': 
+                case '3':
+                    editar()
+                    break
+                case '4':
+                    apagar()
+                    break
+                case '5':
+                    cadastrar(livrosTerror)
+                    break
+                case '6':
+                    listar()
+                    break                
+                case '7': 
                     alert('sair')
                     break loop;
            }
