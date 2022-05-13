@@ -8,24 +8,31 @@
         alert('cadastrar')
         let nome = prompt('nome do livro');
         let autor = prompt('nome do autor');
+        let ano = parseInt(prompt('ano de publicacao do livro '));
         let livro = {
             nome: nome,
-            autor: autor
+            autor: autor,
+            ano: ano 
         };
         livros.push(livro);
     }
-    function listar() {
+    function calcularIdade(ano) {
+        let idade = new Date().getFullYear() - ano;
+        return idade;
+    }
+    function listar(livros) {
         alert('listar')
         let mensagem = '';
         let id = 0;
         for (let livro of livros) {
-            mensagem += id + ':' + livro['nome'] + '-' + livro.autor + '\n';
+            let idade = calcularIdade(livro.ano )
+            mensagem += id + ':' + livro['nome'] + '-' + livro.autor + ':' + livro.ano + 'publicado há ' + idade + '\n';
             id++ ;
         }
         alert(mensagem);
     }   
-    function editar() {
-        listar()
+    function editar(livros) {
+        listar(livros)
         let id = parseInt(prompt('Qual id quer editar?'))
         let livro = livros[id]
         let nome = prompt(`nome do livro? [${livro.nome}]`); 
@@ -36,14 +43,19 @@
         if (autor == '') {
             autor = livro.autor        
         } 
+        let ano = prompt(`ano  do livro? [${livro.ano}]`);
+        if (ano == '') {
+            ano = livro.ano        
+        }
         let livroNovo = {
             nome: nome,
-            autor: autor
+            autor: autor,
+            ano: ano
         };
         livros[id] = livroNovo
     }  
-    function apagar() {
-        listar()
+    function apagar(livros) {
+        listar(livros)
         let id = parseInt(prompt('Qual id quer apagar?')) 
         livros.splice(id, 1)
     }
@@ -56,19 +68,20 @@
                     cadastrar(livrosFiccao)
                     break
                 case '2': 
-                    listar()
+                    listar(livrosFiccao)
+
                     break
                 case '3':
-                    editar()
+                    editar(livrosFiccao)
                     break
                 case '4':
-                    apagar()
+                    apagar(livrosFiccao)
                     break
                 case '5':
                     cadastrar(livrosTerror)
                     break
                 case '6':
-                    listar()
+                    listar(livrosTerror)
                     break                
                 case '7': 
                     alert('sair')
