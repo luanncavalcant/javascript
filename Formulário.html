@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livros</title>
+    <script src="javascript.js"></script>
+    <script src="nvctml.js"></script>
+</head>
+<body>
+    <h1>Cadastro de Livros</h1>
+    <br>
+    <form action="" onsubmit="controlar_cadastro()" class="formulario">
+        <label>
+            <span>Nome do livro:</span>
+            <input name="nome" type="text" placeholder="nome" id="nome"/>
+        </label>
+        <label>
+            Autor(a):
+            <input name="autor" type="text" id="autor"/>
+        </label> 
+        <label>
+            Editora:
+            <input name="editora" type="text" id="editora"/>
+        </label>
+        <label>
+            Descrição:
+            <textarea name="descricao" cols="30" rows="10"
+            id="descricao"></textarea> <br>
+        </label>
+        <label for="capa" >Capa do livro:</label>
+        <input name="capa" type="file" id="capa"/> <br>
+        <br>
+        <input type="submit" value="Enviar Formulário">
+        <button>Enviar Formulário</button>
+    </form>
+    <button onclick="menu()">menu</button>
+    <button onclick="controlar_lista(livrosFiccao)">mostrar lista de Ficcao</button>
+    <button onclick="controlar_lista(livrosTerror)">mostrar lista de terror</button>
+
+</body>
+</html>
