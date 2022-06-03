@@ -11,7 +11,7 @@
 <body>
     <h1>Cadastro de Livros</h1>
     <br>
-    <form action="" onsubmit="controlar_cadastro()" class="formulario">
+    <form onsubmit="event.preventDefault(); cadastrar(livrosFiccao)" class="formulario">
         <label>
             <span>Nome do livro:</span>
             <input name="nome" type="text" placeholder="nome" id="nome"/>
@@ -21,8 +21,8 @@
             <input name="autor" type="text" id="autor"/>
         </label> 
         <label>
-            Editora:
-            <input name="editora" type="text" id="editora"/>
+            Ano:
+            <input name="ano" type="text" id="ano"/>
         </label>
         <label>
             Descrição:
@@ -32,12 +32,27 @@
         <label for="capa" >Capa do livro:</label>
         <input name="capa" type="file" id="capa"/> <br>
         <br>
-        <input type="submit" value="Enviar Formulário">
+        <input type="submit" value="Enviar Formulário" >
         <button>Enviar Formulário</button>
     </form>
     <button onclick="menu()">menu</button>
     <button onclick="controlar_lista(livrosFiccao)">mostrar lista de Ficcao</button>
     <button onclick="controlar_lista(livrosTerror)">mostrar lista de terror</button>
+    <button onclick="teste(event)">teste</button>
+    <table>
+        <thead>
+            <tr>
+                <th>nome</th>
+                <th>autor</th>
+                <th>Ano</th>
+                <th>acoes</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+
 
 </body>
 </html>
