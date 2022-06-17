@@ -7,10 +7,20 @@
     <title>Cadastro de Livros</title>
     <script src="javascript.js"></script>
     <script src="nvctml.js"></script>
+    <script src="integracao.js"></script> 
+    <style>
+        .certa{
+            color: green;
+        }
+        .errado{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Cadastro de Livros</h1>
     <br>
+    <div id="mensagem"></div>
     <form onsubmit="event.preventDefault(); cadastrar(livrosFiccao)" class="formulario">
         <label>
             <span>Nome do livro:</span>

@@ -2,21 +2,77 @@
 let livrosTerror = [];
 let livrosFiccao = [];
 function adicionar(livros, livro) { 
-    livros.push(livro);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            livros.push(livro);
+            resolve({ok: true})
+        }, 1000);
+    })
 }
 function alterar(livros, livro, id) {
-    livros[id] = livro
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            livros[id] = livro
+            resolve({ok: true})
+        }, 1000);
+    })
 }
 function deletar(livros, id) {
-    livros.splice(id, 1)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            livros.splice(id, 1)
+            resolve({ok: true})
+        }, 1000);
+    })
 }
 function listar(livros) {
-    return livros
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(livros)
+        }, 1000);
+    })
 }
-function controlar_lista(livros) {
-    livros = listar(livros);
-    mostrar_lista(livros)
+//model
+function calcularIdade(ano) {
+    let idade = new Date().getFullYear() - ano;
+    return idade;
 }
+async function controlar_lista(livros) {
+    let lista = await listar(livros)
+    mostrar_lista(lista)
+}
+/*function controlar_lista(livros) {
+    listar(livros).then( (livros) => {
+        mostrar_lista(livros)
+    });
+}*/
+async function cadastrar(livros) {
+    let livro = mostrar_cadastro()
+    let resultado = await adicionar(livros, livro)
+    mostrar_resultado(resultado)
+}
+function editar(livros) {
+    controlar_lista(livros)
+    //control and view
+    let id = parseInt(prompt('Qual id quer editar?'))
+    controlar_edicao(livros, id)
+}
+function controlar_edicao(livros, id) { 
+    let livro = livros[id]
+    let livroNovo = mostrar_edicao(livro)
+    //model
+    alterar(livros, livroNovo, id)
+    
+}  
+function apagar(livros) {
+    controlar_lista(livros)
+    //control and view
+    let id = mostrar_delete() 
+    //model
+    deletar(livros, id)
+    
+}
+
 function mostrar_cadastro() {
     alert('cadastrar') 
     let nome = prompt('nome do livro');
@@ -29,9 +85,7 @@ function mostrar_cadastro() {
     };
     return livro
 }
-function mostrar_edicao() {
-    let id = parseInt(prompt('Qual id quer editar?'))
-    let livro = livros[id]
+function mostrar_edicao(livro) {
     let nome = prompt(`nome do livro? [${livro.nome}]`); 
     if (nome == '') {
         nome = livro.nome        
@@ -49,7 +103,7 @@ function mostrar_edicao() {
         autor: autor,
         ano: ano
     };
-    return [livroNovo, id]
+    return livroNovo
     
 }
 function mostrar_delete() {
@@ -57,15 +111,6 @@ function mostrar_delete() {
     return id 
 }
 
-function cadastrar(livros) {
-    let livro = mostrar_cadastro()
-    adicionar(livros, livro)
-}
-//model
-function calcularIdade(ano) {
-    let idade = new Date().getFullYear() - ano;
-    return idade;
-}
 function mostrar_lista(livros) {
     //view
     alert('listar')
@@ -77,23 +122,9 @@ function mostrar_lista(livros) {
         id++ ;
     }
     alert(mensagem);
-}   
-function editar(livros) {
-    controlar_lista(livros)
-    //control and view
-    let [livroNovo, id] = mostrar_edicao()
-    
-    //model
-    alterar(livros, livroNovo, id)
-    
-}  
-function apagar(livros) {
-    controlar_lista(livros)
-    //control and view
-    let id = mostrar_delete() 
-    //model
-    deletar(livros, id)
-    
+}
+function mostrar_resultado(resultado) {
+    alert(resultado);
 }
 function menu() {
     loop:
